@@ -22,7 +22,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     router.push(`/product/${product.id}`);
   };
 
-  const onPreviewModal: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const onPreviewModalInDiv: MouseEventHandler<HTMLDivElement> = (e) => {
+    e.stopPropagation();
+
+    previewModal.onOpen(product);
+  };
+
+  const onPreviewModalInBtn: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
 
     previewModal.onOpen(product);
@@ -36,7 +42,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div
-      onClick={handleProductExtendClick}
+      onClick={onPreviewModalInDiv}
       className="group cursor-pointer border rounded-xl p-3 shadow-2xl"
     >
       <div className="aspect-square rounded-xl bg-gray-200 relative">
@@ -45,7 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div className="flex gap-x-6 justify-center">
             <IconButton
               icon={<Expand size={20} className="text-gray-600" />}
-              onClick={onPreviewModal}
+              onClick={onPreviewModalInBtn}
             />
             <IconButton
               icon={<ShoppingCart size={20} className="text-gray-600" />}
